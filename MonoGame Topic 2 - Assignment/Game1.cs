@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -40,19 +41,21 @@ namespace MonoGame_Topic_2___Assignment
                 Exit();
 
             // TODO: Add your update logic here
-
+            counter += 1;
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
             _spriteBatch.Begin();
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < _graphics.PreferredBackBufferWidth; i += 80)
             {
-                _spriteBatch.Draw(rectTexture, new Rectangle((counter * 80), (counter * 80), 80, 80), Color.White);
-                _spriteBatch.Draw(rectTexture, new Rectangle(((counter + 1) * 80), ((counter + 1) * 80), 80, 80),Color.Black);
-                counter++;
+                for (int x = 80; x < _graphics.PreferredBackBufferWidth; x += 160)
+                {
+                    _spriteBatch.Draw(rectTexture, new Rectangle((i + x), i, 80, 80), Color.Black);
+                    _spriteBatch.Draw(rectTexture, new Rectangle(i, (i + x), 80, 80), Color.Black);
+                }
             }
             // TODO: Add your drawing code here
             _spriteBatch.End();
